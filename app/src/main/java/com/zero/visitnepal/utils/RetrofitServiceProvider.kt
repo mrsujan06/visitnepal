@@ -1,6 +1,8 @@
 package com.zero.visitnepal.utils
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,11 +21,15 @@ class RetrofitServiceProvider {
             .addInterceptor(logging)
             .build()
 
+        private val moshi: Moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 }

@@ -80,4 +80,7 @@ dependencies {
     // Room dependency
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
 }

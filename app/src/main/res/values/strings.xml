@@ -3,8 +3,9 @@
 
     <!--HomeFragment-->
     <string name="home_fragment">Home Fragment</string>
-    <string name="switch_button_text">switch_button_text</string>
+    <string name="switch_button_text">Switch</string>
 
     <!--CityFragment-->
     <string name="city_fragment">City Fragment</string>
+    <string name="city_image_cd">City Photo</string>
 </resources>
