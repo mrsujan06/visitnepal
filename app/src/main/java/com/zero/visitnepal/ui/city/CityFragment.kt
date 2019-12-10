@@ -8,18 +8,21 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.zero.visitnepal.App
 import com.zero.visitnepal.R
 import com.zero.visitnepal.databinding.FragmentCityBinding
-import com.zero.visitnepal.remote.PlacesService
-import com.zero.visitnepal.repository.PlacesRepositoryImp
+import com.zero.visitnepal.repository.PlacesRepository
 import com.zero.visitnepal.viewmodels.CityViewModel
 import com.zero.visitnepal.viewmodels.CityViewModelFactory
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
 class CityFragment : Fragment() {
 
+    @Inject
+    lateinit var placesRepository: PlacesRepository
     private lateinit var viewModel: CityViewModel
     private lateinit var cityAdapter: CityAdapter
 
@@ -32,10 +35,14 @@ class CityFragment : Fragment() {
         val binding: FragmentCityBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_city, container, false)
 
+        (activity?.applicationContext as App).appComponent.inject(this)
+
         viewModel = ViewModelProvider(
             this,
-            CityViewModelFactory(PlacesRepositoryImp(PlacesService.instance))
+            CityViewModelFactory(placesRepository)
         ).get(CityViewModel::class.java)
+
+        viewModel.getData()
 
         cityAdapter = CityAdapter()
         binding.citiesRv.adapter = cityAdapter

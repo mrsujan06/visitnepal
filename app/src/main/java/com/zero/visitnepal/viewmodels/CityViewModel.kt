@@ -11,8 +11,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
+import javax.inject.Inject
 
-class CityViewModel(private val repository: PlacesRepository) : ViewModel() {
+class CityViewModel @Inject constructor( val repository: PlacesRepository) : ViewModel() {
 
     private val _citiesList = MutableLiveData<PlacesResponse>()
     val citiesList: LiveData<PlacesResponse>
@@ -21,11 +22,7 @@ class CityViewModel(private val repository: PlacesRepository) : ViewModel() {
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    init {
-        getData()
-    }
-
-    private fun getData() = coroutineScope.launch {
+    fun getData() = coroutineScope.launch {
         try {
             val cities = repository.fetchPlaces()
             _citiesList.value = cities

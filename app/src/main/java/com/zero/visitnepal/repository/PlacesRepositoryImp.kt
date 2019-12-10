@@ -4,8 +4,8 @@ import com.zero.visitnepal.model.PlacesResponse
 import com.zero.visitnepal.remote.PlacesService
 import com.zero.visitnepal.utils.Constant
 
-class PlacesRepositoryImp(private val webService: PlacesService) : PlacesRepository {
+class PlacesRepositoryImp(private val placesService: PlacesService) : PlacesRepository {
     override suspend fun fetchPlaces(): PlacesResponse {
-        return webService.fetchPlaces(Constant.CITY_QUERY, Constant.API_KEY)
+        return placesService.fetchPlaces(Constant.CITY_QUERY, Constant.API_KEY)
     }
 }

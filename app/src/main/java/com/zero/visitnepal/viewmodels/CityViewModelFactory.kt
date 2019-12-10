@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.zero.visitnepal.repository.PlacesRepository
 
 @Suppress("UNCHECKED_CAST")
-class CityViewModelFactory(private val repository: PlacesRepository) : ViewModelProvider.Factory {
+class CityViewModelFactory(val repository: PlacesRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return CityViewModel(repository) as T
     }
