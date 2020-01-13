@@ -3,21 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <!-- A ViewPager2 element -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/home_fragment" />
+            android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/switch_button_text" />
-    </LinearLayout>
+        <!-- A circle Indicator -->
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_large"
+            android:layout_marginTop="@dimen/indicator_margin_top"
+            android:background="@drawable/scrim" />
+    </FrameLayout>
 
 </layout>

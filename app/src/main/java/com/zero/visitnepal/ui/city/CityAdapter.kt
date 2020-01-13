@@ -11,7 +11,7 @@ import com.zero.visitnepal.R
 import com.zero.visitnepal.model.PlacesResponse
 import com.zero.visitnepal.model.Result
 import com.zero.visitnepal.utils.Constant
-import kotlinx.android.synthetic.main.city_rv.view.*
+import kotlinx.android.synthetic.main.rv_city.view.*
 
 class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
@@ -20,7 +20,7 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         return CityViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.city_rv,
+                R.layout.rv_city,
                 parent,
                 false
             )

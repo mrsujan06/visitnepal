@@ -3,4 +3,5 @@
     <dimen name="dimen_small">4dp</dimen>
     <dimen name="dimen_medium">12dp</dimen>
     <dimen name="dimen_x_medium">16dp</dimen>
+    <dimen name="dimen_large">48dp</dimen>
 </resources>

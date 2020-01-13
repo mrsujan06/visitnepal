@@ -1,7 +1,5 @@
 package com.zero.visitnepal.utils
 
-import com.zero.visitnepal.BuildConfig
-
 class Constant {
     companion object {
         const val BASE_URL = "https://maps.googleapis.com/"
