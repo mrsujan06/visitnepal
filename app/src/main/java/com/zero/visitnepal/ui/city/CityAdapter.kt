@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.rv_city.view.*
 
 class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
-    private var placeList = mutableListOf<Result>()
+    private var cityList = mutableListOf<Result>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         return CityViewHolder(
@@ -27,15 +27,15 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
         )
     }
 
-    override fun getItemCount() = placeList.size
+    override fun getItemCount() = cityList.size
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-        holder.bindItem(placeList[position])
+        holder.bindItem(cityList[position])
     }
 
     fun setData(cityList: PlacesResponse) {
-        placeList.clear()
-        placeList.addAll(cityList.results)
+        this.cityList.clear()
+        this.cityList.addAll(cityList.results)
         notifyDataSetChanged()
     }
 

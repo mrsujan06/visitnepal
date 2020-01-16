@@ -84,5 +84,8 @@ dependencies {
 
     //Circle Indicator
     implementation 'me.relex:circleindicator:2.1.4'
+
+    //Card view
+    implementation "androidx.cardview:cardview:1.0.0"
     
 }

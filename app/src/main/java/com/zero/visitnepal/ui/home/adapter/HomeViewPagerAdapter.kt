@@ -1,4 +1,4 @@
-package com.zero.visitnepal.ui.home
+package com.zero.visitnepal.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View

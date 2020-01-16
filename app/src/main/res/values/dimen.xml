@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dimen_small">4dp</dimen>
+    <dimen name="dimen_zero">0dp</dimen>
+    <dimen name="dimen_x_small">4dp</dimen>
+    <dimen name="dimen_small">8dp</dimen>
     <dimen name="dimen_medium">12dp</dimen>
     <dimen name="dimen_x_medium">16dp</dimen>
     <dimen name="dimen_large">48dp</dimen>
+
+    <dimen name="dimen_text_medium">16sp</dimen>
+
+    <!-- Home Fragment viewpager circle indicator-->
+    <dimen name="home_indicator_margin_top">200dp</dimen>
+
+    <!-- child recycler view-->
+    <dimen name="child_rv_imageview_width">180dp</dimen>
+    <dimen name="child_rv_imageview_height">130dp</dimen>
 </resources>

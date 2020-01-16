@@ -3,7 +3,7 @@ package com.zero.visitnepal.utils
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 
-private const val MIN_SCALE = 0.95f
+private const val MIN_SCALE = 0.98f
 private const val MIN_ALPHA = 0.7f
 
 class ZoomOutPageTransformer : ViewPager2.PageTransformer {

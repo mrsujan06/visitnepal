@@ -8,4 +8,8 @@ class PlacesRepositoryImp(private val placesService: PlacesService) : PlacesRepo
     override suspend fun fetchPlaces(): PlacesResponse {
         return placesService.fetchPlaces(Constant.CITY_QUERY, Constant.API_KEY)
     }
+
+    override suspend fun fetchAttractions(): PlacesResponse {
+        return placesService.fetchPlaces(Constant.TOP_ATTRACTION_QUERY, Constant.API_KEY)
+    }
 }
