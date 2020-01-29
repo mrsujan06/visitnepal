@@ -5,7 +5,15 @@ import com.zero.visitnepal.remote.PlacesService
 import com.zero.visitnepal.utils.Constant
 
 class PlacesRepositoryImp(private val placesService: PlacesService) : PlacesRepository {
-    override suspend fun fetchPlaces(): PlacesResponse {
+    override suspend fun fetchCities(): PlacesResponse {
         return placesService.fetchPlaces(Constant.CITY_QUERY, Constant.API_KEY)
+    }
+
+    override suspend fun fetchAttractions(): PlacesResponse {
+        return placesService.fetchPlaces(Constant.TOP_ATTRACTION_QUERY, Constant.API_KEY)
+    }
+
+    override suspend fun fetchMountains(): PlacesResponse {
+        return placesService.fetchPlaces(Constant.MOUNTAIN_QUERY, Constant.API_KEY)
     }
 }

@@ -4,4 +4,9 @@
     <dimen name="dimen_medium">12dp</dimen>
     <dimen name="dimen_x_medium">16dp</dimen>
     <dimen name="dimen_large">48dp</dimen>
+
+    <dimen name="dimen_0dp">0dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+
+    <dimen name="dimen_text_size_14sp">14sp</dimen>
 </resources>

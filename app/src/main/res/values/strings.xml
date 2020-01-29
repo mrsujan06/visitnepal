@@ -3,9 +3,12 @@
 
     <!--HomeFragment-->
     <string name="home_fragment">Home Fragment</string>
-    <string name="switch_button_text">Switch</string>
+    <string name="cities"><b> Nepal Cities</b></string>
+    <string name="top_attractions"><b>Top Attractions</b></string>
+    <string name="mountains">Mountains</string>
 
     <string name="viewpager_home_slide_images">Slide Images</string>
+    <string name="nepal_city">Nepal City</string>
 
     <!--CityFragment-->
     <string name="city_fragment">City Fragment</string>
