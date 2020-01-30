@@ -24,7 +24,7 @@ class CityViewModel @Inject constructor( val repository: PlacesRepository) : Vie
 
     fun getData() = coroutineScope.launch {
         try {
-            val cities = repository.fetchPlaces()
+            val cities = repository.fetchCities()
             _citiesList.value = cities
         } catch (networkError: IOException) {
             Timber.e(networkError)
