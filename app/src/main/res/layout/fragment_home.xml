@@ -30,7 +30,7 @@
                 <me.relex.circleindicator.CircleIndicator3
                     android:id="@+id/indicator"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_large"
+                    android:layout_height="@dimen/padding_xlarge"
                     android:layout_marginTop="@dimen/indicator_margin_top"
                     android:background="@drawable/scrim" />
             </FrameLayout>
@@ -39,20 +39,20 @@
                 android:id="@+id/cities"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:text="@string/cities"
-                android:textSize="@dimen/dimen_text_size_14sp"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/cities_title"
+                android:textSize="@dimen/textsize_14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
             <ImageView
                 android:id="@+id/home_view_all_city"
-                android:layout_width="@dimen/dimen_0dp"
+                android:layout_width="@dimen/padding_zero"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
-                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:layout_marginBottom="@dimen/padding_small"
                 app:layout_constraintBottom_toTopOf="@+id/home_city_list_rv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout"
@@ -60,11 +60,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_city_list_rv"
-                android:layout_width="@dimen/dimen_0dp"
+                android:layout_width="@dimen/padding_zero"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,20 +75,20 @@
                 android:id="@+id/top_attraction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:text="@string/top_attractions"
-                android:textSize="@dimen/dimen_text_size_14sp"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/top_attractions_title"
+                android:textSize="@dimen/textsize_14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_city_list_rv" />
 
             <ImageView
                 android:id="@+id/home_view_all_attractions"
-                android:layout_width="@dimen/dimen_0dp"
+                android:layout_width="@dimen/padding_zero"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
-                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:layout_marginBottom="@dimen/padding_small"
                 app:layout_constraintBottom_toTopOf="@+id/home_top_attraction_list_rv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_city_list_rv"
@@ -96,11 +96,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_top_attraction_list_rv"
-                android:layout_width="@dimen/dimen_0dp"
+                android:layout_width="@dimen/padding_zero"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,10 +111,10 @@
                 android:id="@+id/mountain_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:text="@string/mountains"
-                android:textSize="@dimen/dimen_text_size_14sp"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/mountains_title"
+                android:textSize="@dimen/textsize_14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_top_attraction_list_rv" />
 
@@ -122,24 +122,59 @@
                 android:id="@+id/home_view_all_mountain"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_top_attraction_list_rv"
                 app:srcCompat="@drawable/ic_view_all" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_mountain_list_rv"
-                android:layout_width="@dimen/dimen_0dp"
+                android:layout_width="@dimen/padding_zero"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mountain_tv" />
+
+            <!--Temples -->
+            <TextView
+                android:id="@+id/temple_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/temples_title"
+                android:textSize="@dimen/textsize_14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_mountain_list_rv" />
+
+            <ImageView
+                android:id="@+id/home_view_all_temples"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_mountain_list_rv"
+                app:srcCompat="@drawable/ic_view_all" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_temples_list_rv"
+                android:layout_width="@dimen/padding_zero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/temple_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

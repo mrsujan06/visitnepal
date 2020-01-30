@@ -14,7 +14,7 @@ data class Result(
     @Json(name = "name")
     val name: String,
     @Json(name = "photos")
-    val photos: List<Photo>,
+    val photos: List<Photo>?,
     @Json(name = "place_id")
     val placeId: String,
     @Json(name = "reference")

@@ -6,4 +6,5 @@ interface PlacesRepository {
     suspend fun fetchCities(): PlacesResponse
     suspend fun fetchAttractions(): PlacesResponse
     suspend fun fetchMountains(): PlacesResponse
+    suspend fun fetchTemples(): PlacesResponse
 }

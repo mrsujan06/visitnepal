@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeCityAdapter: HomePlacesAdapter
     private lateinit var homeAttractionAdapter: HomePlacesAdapter
     private lateinit var homeMountainAdapter: HomePlacesAdapter
+    private lateinit var homeTempleAdapter: HomePlacesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +58,10 @@ class HomeFragment : Fragment() {
         homeMountainAdapter = HomePlacesAdapter()
         binding.homeMountainListRv.adapter = homeMountainAdapter
 
+        //Temple adapter
+        homeTempleAdapter = HomePlacesAdapter()
+        binding.homeTemplesListRv.adapter = homeTempleAdapter
+
         viewModel = ViewModelProvider(this, HomeFragmentViewModelFactory(placesRepository)).get(
             HomeFragmentViewModel::class.java
         )
@@ -64,6 +69,7 @@ class HomeFragment : Fragment() {
         viewModel.getCitiesData()
         viewModel.getAttractionData()
         viewModel.getMountainsData()
+        viewModel.getTemplesData()
 
         viewModel.placesList.observe(viewLifecycleOwner, Observer {
             homeCityAdapter.setData(it)
@@ -77,6 +83,9 @@ class HomeFragment : Fragment() {
             homeMountainAdapter.setData(it)
         })
 
+        viewModel.templeList.observe(viewLifecycleOwner, Observer {
+            homeTempleAdapter.setData(it)
+        })
         return binding.root
     }
 }

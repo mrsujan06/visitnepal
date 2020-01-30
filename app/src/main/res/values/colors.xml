@@ -3,4 +3,6 @@
     <color name="colorPrimary">#1D63B4</color>
     <color name="colorPrimaryDark">#1C4E96</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="gs_one">#110C0C</color>
 </resources>

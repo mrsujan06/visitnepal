@@ -45,7 +45,7 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
         fun bindItem(result: Result) {
             mPlaceName?.text = result.name
-            val photoReference: String = result.photos[0].photoReference
+            val photoReference: String = result.photos!![0].photoReference
             val imageURL: String = Constant.IMAGE_URL + photoReference + Constant.IMAGE_KEY + Constant.API_KEY
             Picasso.get().load(imageURL).into(mPlaceImage)
         }

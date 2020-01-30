@@ -33,14 +33,14 @@ class HomePlacesAdapter : RecyclerView.Adapter<HomePlacesAdapter.HomePlacesViewH
 
     fun setData(cityList: PlacesResponse) {
         placeList.clear()
-        placeList.addAll(cityList.results.take(12))
+        placeList.addAll(cityList.results)
         notifyDataSetChanged()
     }
 
     inner class HomePlacesViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         fun bindItem(result: Result) {
             itemView.item_places_name?.text = result.name
-            val photoReference: String = result.photos[0].photoReference
+            val photoReference: String = result.photos!![0].photoReference
             val imageURL: String =
                 Constant.IMAGE_URL + photoReference + Constant.IMAGE_KEY + Constant.API_KEY
             Picasso.get().load(imageURL).into(itemView.item_places_img)

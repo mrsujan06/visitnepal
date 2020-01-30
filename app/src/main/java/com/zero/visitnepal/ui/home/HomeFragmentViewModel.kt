@@ -27,6 +27,10 @@ class HomeFragmentViewModel @Inject constructor(val repository: PlacesRepository
     val mountainList: LiveData<PlacesResponse>
         get() = _mountainList
 
+    private val _templeList = MutableLiveData<PlacesResponse>()
+    val templeList: LiveData<PlacesResponse>
+        get() = _templeList
+
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -50,11 +54,22 @@ class HomeFragmentViewModel @Inject constructor(val repository: PlacesRepository
         }
     }
 
-    //     fetch attraction data
+    //     fetch mountain data
     fun getMountainsData() = coroutineScope.launch {
         try {
             val mountains = repository.fetchMountains()
+            mountains.results.take(12)
             _mountainList.value = mountains
+        } catch (networkError: IOException) {
+            Timber.e(networkError)
+        }
+    }
+
+    //     fetch temple data
+    fun getTemplesData() = coroutineScope.launch {
+        try {
+            val temples = repository.fetchTemples()
+            _templeList.value = temples
         } catch (networkError: IOException) {
             Timber.e(networkError)
         }

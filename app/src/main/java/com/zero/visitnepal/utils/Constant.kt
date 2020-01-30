@@ -12,6 +12,7 @@ class Constant {
 
         const val CITY_QUERY = "Top+Cities+In+Nepal"
         const val TOP_ATTRACTION_QUERY = "Top+Attractions+In+Nepal"
+        const val TEMPLE_QUERY = "Top+Temple+In+Nepal"
         const val MOUNTAIN_QUERY = "Mountain+In+Nepal"
     }
 }
