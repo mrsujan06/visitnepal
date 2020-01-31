@@ -15,63 +15,46 @@ import javax.inject.Inject
 
 class HomeFragmentViewModel @Inject constructor(val repository: PlacesRepository) : ViewModel() {
 
-    private val _placesList = MutableLiveData<PlacesResponse>()
-    val placesList: LiveData<PlacesResponse>
-        get() = _placesList
+    private val _cityObservable = MutableLiveData<PlacesResponse>()
+    val cityObservable: LiveData<PlacesResponse>
+        get() = _cityObservable
 
-    private val _attractionList = MutableLiveData<PlacesResponse>()
-    val attractionList: LiveData<PlacesResponse>
-        get() = _attractionList
+    private val _attractionObservable = MutableLiveData<PlacesResponse>()
+    val attractionObservable: LiveData<PlacesResponse>
+        get() = _attractionObservable
 
-    private val _mountainList = MutableLiveData<PlacesResponse>()
-    val mountainList: LiveData<PlacesResponse>
-        get() = _mountainList
+    private val _mountainObservable = MutableLiveData<PlacesResponse>()
+    val mountainObservable: LiveData<PlacesResponse>
+        get() = _mountainObservable
 
-    private val _templeList = MutableLiveData<PlacesResponse>()
-    val templeList: LiveData<PlacesResponse>
-        get() = _templeList
+    private val _templeObservable = MutableLiveData<PlacesResponse>()
+    val templeObservable: LiveData<PlacesResponse>
+        get() = _templeObservable
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    //fetch cities data
-    fun getCitiesData() = coroutineScope.launch {
+    // fetch places data
+    fun fetchPlacesData() = coroutineScope.launch {
         try {
-            val cities = repository.fetchCities()
-            _placesList.value = cities
+            observeTenPlaces(_cityObservable, repository.fetchCities()) //cities
+            observeTenPlaces(_attractionObservable, repository.fetchAttractions()) //attraction
+            observeTenPlaces(_mountainObservable, repository.fetchMountains()) //mountains
+            observeTenPlaces(_templeObservable, repository.fetchTemples()) //temples
         } catch (networkError: IOException) {
             Timber.e(networkError)
         }
     }
 
-    // fetch attraction data
-    fun getAttractionData() = coroutineScope.launch {
-        try {
-            val attractions = repository.fetchAttractions()
-            _attractionList.value = attractions
-        } catch (networkError: IOException) {
-            Timber.e(networkError)
-        }
-    }
+    //  Filter the list of results to 10, and hold it in live data
+    private fun observeTenPlaces(
+        placesObservable: MutableLiveData<PlacesResponse>,
+        placesResponse: PlacesResponse
 
-    //     fetch mountain data
-    fun getMountainsData() = coroutineScope.launch {
-        try {
-            val mountains = repository.fetchMountains()
-            mountains.results.take(12)
-            _mountainList.value = mountains
-        } catch (networkError: IOException) {
-            Timber.e(networkError)
-        }
-    }
-
-    //     fetch temple data
-    fun getTemplesData() = coroutineScope.launch {
-        try {
-            val temples = repository.fetchTemples()
-            _templeList.value = temples
-        } catch (networkError: IOException) {
-            Timber.e(networkError)
+    ) {
+        placesResponse.apply {
+            this.results = this.results.take(10)
+            placesObservable.value = this
         }
     }
 
