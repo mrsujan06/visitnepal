@@ -85,5 +85,4 @@ class HomeFragment : Fragment() {
             placesAdapter.setData(it)
         })
     }
-
 }

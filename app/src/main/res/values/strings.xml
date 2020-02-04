@@ -2,10 +2,11 @@
     <string name="app_name">Visit Nepal</string>
 
     <!--HomeFragment-->
-    <string name="cities_title"><b> Nepal Cities</b></string>
-    <string name="top_attractions_title"><b>Top Attractions</b></string>
+    <string name="cities_title">Nepal Cities</string>
+    <string name="top_attractions_title">Top Attractions</string>
     <string name="mountains_title">Mountains</string>
     <string name="temples_title">Temples</string>
+    <string name="see_all_title">See All</string>
 
     <string name="viewpager_home_slide_images">Slide Images</string>
 

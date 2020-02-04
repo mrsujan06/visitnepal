@@ -4,5 +4,8 @@
     <color name="colorPrimaryDark">#1C4E96</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="gs_one">#110C0C</color>
+    <color name="gs_one">#5C5B5B</color>
+    <color name="gs_two">#CDDBD9D9</color>
+
+    <color name="black">#020101</color>
 </resources>

@@ -15,7 +15,10 @@
         app:elevation="@dimen/cardview_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
             android:id="@+id/item_places_img"
@@ -34,7 +37,9 @@
         android:layout_marginStart="@dimen/padding_small"
         android:layout_marginTop="@dimen/padding_small"
         android:layout_marginBottom="@dimen/padding_small"
-        android:textColor="@color/gs_one"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14"
+        android:fontFamily="@font/font"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardview" />
