@@ -6,7 +6,7 @@ data class PlacesResponse(
     @Json(name = "html_attributions")
     val htmlAttributions: List<Any>,
     @Json(name = "next_page_token")
-    val nextPageToken: String,
+    val nextPageToken: String?,
     @Json(name = "results")
     var results: List<Result>,
     @Json(name = "status")

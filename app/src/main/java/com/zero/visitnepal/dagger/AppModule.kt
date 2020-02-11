@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.zero.visitnepal.remote.PlacesService
 import com.zero.visitnepal.repository.PlacesRepository
 import com.zero.visitnepal.repository.PlacesRepositoryImp
+import com.zero.visitnepal.utils.ConnectionChecker
 import com.zero.visitnepal.utils.Constant
 import dagger.Module
 import dagger.Provides
@@ -18,6 +19,12 @@ import javax.inject.Singleton
 
 @Module
 class AppModule {
+
+    @Provides
+    @Singleton
+    fun provideConnectionChecker(): ConnectionChecker {
+        return ConnectionChecker()
+    }
 
     @Provides
     @Singleton

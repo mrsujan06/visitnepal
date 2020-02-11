@@ -20,6 +20,10 @@
         android:clickable="true"
         android:focusable="true">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/item_places_img"
             android:layout_width="match_parent"
@@ -27,6 +31,17 @@
             android:contentDescription="@string/cities_title"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/vp_pokhara" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/image_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="image_loading.json"
+                app:lottie_loop="true" />
+
+        </FrameLayout>
 
     </androidx.cardview.widget.CardView>
 

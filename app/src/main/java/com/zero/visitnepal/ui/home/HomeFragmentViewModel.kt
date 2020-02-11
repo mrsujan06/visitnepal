@@ -1,19 +1,23 @@
 package com.zero.visitnepal.ui.home
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zero.visitnepal.model.PlacesResponse
 import com.zero.visitnepal.repository.PlacesRepository
+import com.zero.visitnepal.utils.ConnectionChecker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.io.IOException
 import javax.inject.Inject
 
-class HomeFragmentViewModel @Inject constructor(val repository: PlacesRepository) : ViewModel() {
+class HomeFragmentViewModel @Inject constructor(
+    private val repository: PlacesRepository,
+    private val connectionChecker: ConnectionChecker
+) : ViewModel() {
 
     private val _cityObservable = MutableLiveData<PlacesResponse>()
     val cityObservable: LiveData<PlacesResponse>
@@ -31,18 +35,31 @@ class HomeFragmentViewModel @Inject constructor(val repository: PlacesRepository
     val templeObservable: LiveData<PlacesResponse>
         get() = _templeObservable
 
+    private val _loadingState = MutableLiveData<LoadingState>()
+    val loadingState: LiveData<LoadingState>
+        get() = _loadingState
+
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+
     // fetch places data
-    fun fetchPlacesData() = coroutineScope.launch {
+    fun fetchPlacesData(context: Context) = coroutineScope.launch {
         try {
-            observeTenPlaces(_cityObservable, repository.fetchCities()) //cities
-            observeTenPlaces(_attractionObservable, repository.fetchAttractions()) //attraction
-            observeTenPlaces(_mountainObservable, repository.fetchMountains()) //mountains
-            observeTenPlaces(_templeObservable, repository.fetchTemples()) //temples
-        } catch (networkError: IOException) {
-            Timber.e(networkError)
+            if (!connectionChecker.isOnline(context)) {
+                _loadingState.value = LoadingState.ERROR
+            } else {
+                _loadingState.value = LoadingState.LOADING
+                observeTenPlaces(_cityObservable, repository.fetchCities()) //cities
+                observeTenPlaces(_attractionObservable, repository.fetchAttractions()) //attraction
+                observeTenPlaces(_mountainObservable, repository.fetchMountains()) //mountains
+                observeTenPlaces(_templeObservable, repository.fetchTemples()) //temples
+                _loadingState.value = LoadingState.DONE
+            }
+
+        } catch (error: Error) {
+            Timber.e(error)
+            _loadingState.value = LoadingState.ERROR
         }
     }
 
@@ -56,6 +73,12 @@ class HomeFragmentViewModel @Inject constructor(val repository: PlacesRepository
             this.results = this.results.take(10)
             placesObservable.value = this
         }
+    }
+
+    enum class LoadingState {
+        LOADING,
+        DONE,
+        ERROR
     }
 
     override fun onCleared() {

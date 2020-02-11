@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.zero.visitnepal.R
 import com.zero.visitnepal.model.PlacesResponse
 import com.zero.visitnepal.model.Result
 import com.zero.visitnepal.utils.Constant
 import kotlinx.android.synthetic.main.item_places_home.view.*
+import timber.log.Timber
 
 class HomePlacesAdapter : RecyclerView.Adapter<HomePlacesAdapter.HomePlacesViewHolder>() {
 
@@ -43,7 +45,19 @@ class HomePlacesAdapter : RecyclerView.Adapter<HomePlacesAdapter.HomePlacesViewH
             val photoReference: String = result.photos?.get(0)?.photoReference ?: "null"
             val imageURL: String =
                 Constant.IMAGE_URL + photoReference + Constant.IMAGE_KEY + Constant.API_KEY
-            Picasso.get().load(imageURL).into(itemView.item_places_img)
+
+            Picasso.get()
+                .load(imageURL)
+                .into(itemView.item_places_img, object : Callback {
+                    override fun onSuccess() {
+                        itemView.image_progress_bar.visibility = View.GONE
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Timber.e(e)
+                    }
+
+                })
         }
     }
 }

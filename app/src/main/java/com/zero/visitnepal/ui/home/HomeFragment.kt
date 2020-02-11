@@ -1,6 +1,5 @@
 package com.zero.visitnepal.ui.home
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,9 @@ import com.zero.visitnepal.model.PlacesResponse
 import com.zero.visitnepal.repository.PlacesRepository
 import com.zero.visitnepal.ui.home.adapter.HomePlacesAdapter
 import com.zero.visitnepal.ui.home.adapter.HomeViewPagerAdapter
+import com.zero.visitnepal.utils.ConnectionChecker
 import com.zero.visitnepal.utils.ZoomOutPageTransformer
+import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
 /**
@@ -27,6 +28,9 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var placesRepository: PlacesRepository
+
+    @Inject
+    lateinit var connectionChecker: ConnectionChecker
 
     private lateinit var viewModel: HomeFragmentViewModel
     private lateinit var homeCityAdapter: HomePlacesAdapter
@@ -67,14 +71,25 @@ class HomeFragment : Fragment() {
     }
 
     private fun setViewModel() {
-        viewModel = ViewModelProvider(this, HomeFragmentViewModelFactory(placesRepository)).get(
+        viewModel = ViewModelProvider(
+            this,
+            HomeFragmentViewModelFactory(placesRepository, connectionChecker)
+        ).get(
             HomeFragmentViewModel::class.java
         )
-        viewModel.fetchPlacesData()
+        context?.let { viewModel.fetchPlacesData(it) }
         observePlaces(viewModel.cityObservable, homeCityAdapter)
         observePlaces(viewModel.attractionObservable, homeAttractionAdapter)
         observePlaces(viewModel.mountainObservable, homeMountainAdapter)
         observePlaces(viewModel.templeObservable, homeTempleAdapter)
+
+        viewModel.loadingState.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                HomeFragmentViewModel.LoadingState.LOADING -> displayProgressbar()
+                HomeFragmentViewModel.LoadingState.DONE -> displayPlaces()
+                else -> displayConnectionError()
+            }
+        })
     }
 
     private fun observePlaces(
@@ -84,5 +99,24 @@ class HomeFragment : Fragment() {
         liveData.observe(viewLifecycleOwner, Observer {
             placesAdapter.setData(it)
         })
+    }
+
+    private fun displayPlaces() {
+        home_container.visibility = View.VISIBLE
+        progressbar_container.visibility = View.GONE
+        network_error.visibility = View.GONE
+    }
+
+    private fun displayProgressbar() {
+        progressbar_container.visibility = View.VISIBLE
+        home_container.visibility = View.GONE
+        network_error.visibility = View.GONE
+    }
+
+    private fun displayConnectionError() {
+        network_error.visibility = View.VISIBLE
+        progressbar_animated_bg.visibility = View.VISIBLE
+        progressbar.visibility = View.GONE
+        home_container.visibility = View.GONE
     }
 }
