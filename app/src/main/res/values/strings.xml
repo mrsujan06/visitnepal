@@ -8,6 +8,8 @@
     <string name="temples_title">Temples</string>
     <string name="see_all_title">See All</string>
 
+    <string name="button_retry">RETRY</string>
+
     <string name="viewpager_home_slide_images">Slide Images</string>
 
     <!--CityFragment-->

@@ -49,6 +49,8 @@ class HomeFragment : Fragment() {
         setViewPager(binding)
         setAdapter(binding)
         setViewModel()
+
+        onRetry(binding)
         return binding.root
     }
 
@@ -101,22 +103,27 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private fun onRetry(binding: FragmentHomeBinding) {
+        binding.retryButton.setOnClickListener {
+            context?.let { it1 -> viewModel.fetchPlacesData(it1) }
+        }
+    }
+
     private fun displayPlaces() {
         home_container.visibility = View.VISIBLE
         progressbar_container.visibility = View.GONE
-        network_error.visibility = View.GONE
+        error_container.visibility = View.GONE
     }
 
     private fun displayProgressbar() {
         progressbar_container.visibility = View.VISIBLE
         home_container.visibility = View.GONE
-        network_error.visibility = View.GONE
+        error_container.visibility = View.GONE
     }
 
     private fun displayConnectionError() {
-        network_error.visibility = View.VISIBLE
-        progressbar_animated_bg.visibility = View.VISIBLE
-        progressbar.visibility = View.GONE
+        error_container.visibility = View.VISIBLE
+        progressbar_container.visibility = View.GONE
         home_container.visibility = View.GONE
     }
 }

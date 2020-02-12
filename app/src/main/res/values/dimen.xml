@@ -11,12 +11,13 @@
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_15">15sp</dimen>
 
-    <!-- Home Fragment Card View -->
+    <!-- item_places -->
+    <dimen name="item_places_home_width">180dp</dimen>
     <dimen name="cardview_height">120dp</dimen>
     <dimen name="cardview_elevation">15dp</dimen>
     <dimen name="cardview_cornerradius">8dp</dimen>
 
-    <dimen name="item_places_home_width">180dp</dimen>
-
+    <!-- Home Fragment -->
     <dimen name="indicator_margin_top">200dp</dimen>
+    <dimen name="error_retry_btn_margin_top">280dp</dimen>
 </resources>

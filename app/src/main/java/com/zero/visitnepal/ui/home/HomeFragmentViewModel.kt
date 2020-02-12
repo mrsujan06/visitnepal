@@ -1,6 +1,7 @@
 package com.zero.visitnepal.ui.home
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -48,6 +49,7 @@ class HomeFragmentViewModel @Inject constructor(
         try {
             if (!connectionChecker.isOnline(context)) {
                 _loadingState.value = LoadingState.ERROR
+                Toast.makeText(context, "Please Connect to Network", Toast.LENGTH_SHORT).show()
             } else {
                 _loadingState.value = LoadingState.LOADING
                 observeTenPlaces(_cityObservable, repository.fetchCities()) //cities
@@ -60,6 +62,7 @@ class HomeFragmentViewModel @Inject constructor(
         } catch (error: Error) {
             Timber.e(error)
             _loadingState.value = LoadingState.ERROR
+            Toast.makeText(context, "Please Connect to Network", Toast.LENGTH_SHORT).show()
         }
     }
 
