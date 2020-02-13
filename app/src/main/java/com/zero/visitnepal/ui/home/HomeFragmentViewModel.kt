@@ -45,11 +45,10 @@ class HomeFragmentViewModel @Inject constructor(
 
 
     // fetch places data
-    fun fetchPlacesData(context: Context) = coroutineScope.launch {
+    fun fetchPlacesData() = coroutineScope.launch {
         try {
-            if (!connectionChecker.isOnline(context)) {
+            if (!connectionChecker.isOnline()) {
                 _loadingState.value = LoadingState.ERROR
-                Toast.makeText(context, "Please Connect to Network", Toast.LENGTH_SHORT).show()
             } else {
                 _loadingState.value = LoadingState.LOADING
                 observeTenPlaces(_cityObservable, repository.fetchCities()) //cities
@@ -62,7 +61,6 @@ class HomeFragmentViewModel @Inject constructor(
         } catch (error: Error) {
             Timber.e(error)
             _loadingState.value = LoadingState.ERROR
-            Toast.makeText(context, "Please Connect to Network", Toast.LENGTH_SHORT).show()
         }
     }
 

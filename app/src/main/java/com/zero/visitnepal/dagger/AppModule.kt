@@ -1,8 +1,10 @@
 package com.zero.visitnepal.dagger
 
+import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.zero.visitnepal.App
 import com.zero.visitnepal.remote.PlacesService
 import com.zero.visitnepal.repository.PlacesRepository
 import com.zero.visitnepal.repository.PlacesRepositoryImp
@@ -18,12 +20,20 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class AppModule {
+class AppModule(var app: App) {
 
     @Provides
     @Singleton
-    fun provideConnectionChecker(): ConnectionChecker {
-        return ConnectionChecker()
+    fun provideApp(): App = app
+
+    @Provides
+    @Singleton
+    fun provideContext(): Context = app.applicationContext
+
+    @Provides
+    @Singleton
+    fun provideConnectionChecker(context: Context): ConnectionChecker {
+        return ConnectionChecker(context)
     }
 
     @Provides

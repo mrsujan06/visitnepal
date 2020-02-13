@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -79,7 +80,7 @@ class HomeFragment : Fragment() {
         ).get(
             HomeFragmentViewModel::class.java
         )
-        context?.let { viewModel.fetchPlacesData(it) }
+        viewModel.fetchPlacesData()
         observePlaces(viewModel.cityObservable, homeCityAdapter)
         observePlaces(viewModel.attractionObservable, homeAttractionAdapter)
         observePlaces(viewModel.mountainObservable, homeMountainAdapter)
@@ -105,7 +106,7 @@ class HomeFragment : Fragment() {
 
     private fun onRetry(binding: FragmentHomeBinding) {
         binding.retryButton.setOnClickListener {
-            context?.let { it1 -> viewModel.fetchPlacesData(it1) }
+            viewModel.fetchPlacesData()
         }
     }
 
@@ -125,5 +126,6 @@ class HomeFragment : Fragment() {
         error_container.visibility = View.VISIBLE
         progressbar_container.visibility = View.GONE
         home_container.visibility = View.GONE
+        Toast.makeText(context, "Please Connect to Network", Toast.LENGTH_SHORT).show()
     }
 }
