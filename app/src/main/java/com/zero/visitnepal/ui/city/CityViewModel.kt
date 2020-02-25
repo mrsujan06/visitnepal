@@ -1,4 +1,4 @@
-package com.zero.visitnepal.viewmodels
+package com.zero.visitnepal.ui.city
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

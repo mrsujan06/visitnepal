@@ -43,7 +43,6 @@ class HomeFragmentViewModel @Inject constructor(
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     // fetch places data
     fun fetchPlacesData() = coroutineScope.launch {
         try {

@@ -12,8 +12,6 @@ import com.zero.visitnepal.App
 import com.zero.visitnepal.R
 import com.zero.visitnepal.databinding.FragmentCityBinding
 import com.zero.visitnepal.repository.PlacesRepository
-import com.zero.visitnepal.viewmodels.CityViewModel
-import com.zero.visitnepal.viewmodels.CityViewModelFactory
 import javax.inject.Inject
 
 /**

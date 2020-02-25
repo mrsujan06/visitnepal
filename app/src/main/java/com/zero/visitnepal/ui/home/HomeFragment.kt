@@ -51,6 +51,8 @@ class HomeFragment : Fragment() {
         setAdapter(binding)
         setViewModel()
 
+        binding.cities.navigate(R.id.action_homeFragment_to_cityFragment)
+
         onRetry(binding)
         return binding.root
     }
