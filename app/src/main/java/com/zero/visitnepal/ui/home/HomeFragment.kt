@@ -50,9 +50,6 @@ class HomeFragment : Fragment() {
         setViewPager(binding)
         setAdapter(binding)
         setViewModel()
-
-        binding.cities.navigate(R.id.action_homeFragment_to_cityFragment)
-
         onRetry(binding)
         return binding.root
     }
@@ -95,6 +92,9 @@ class HomeFragment : Fragment() {
                 else -> displayConnectionError()
             }
         })
+
+        cities.navigate(R.id.action_homeFragment_to_cityFragment)
+
     }
 
     private fun observePlaces(
@@ -128,6 +128,6 @@ class HomeFragment : Fragment() {
         error_container.visibility = View.VISIBLE
         progressbar_container.visibility = View.GONE
         home_container.visibility = View.GONE
-        Toast.makeText(context, "Please Connect to Network", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, R.string.network_error_message, Toast.LENGTH_SHORT).show()
     }
 }

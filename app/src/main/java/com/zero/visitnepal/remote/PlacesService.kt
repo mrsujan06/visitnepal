@@ -8,4 +8,7 @@ import retrofit2.http.Query
 interface PlacesService {
     @GET(Constant.PLACE_URL)
     suspend fun fetchPlaces(@Query("query") query: String, @Query("key") key: String): PlacesResponse
+
+    @GET(Constant.PLACE_URL)
+    suspend fun fetchPlacesUsingToken(@Query("pagetoken") query: String, @Query("key") key: String): PlacesResponse
 }

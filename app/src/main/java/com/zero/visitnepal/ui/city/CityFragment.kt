@@ -29,26 +29,31 @@ class CityFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val binding: FragmentCityBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_city, container, false)
-
         (activity?.applicationContext as App).appComponent.inject(this)
+        setViewModel()
+        setAdapter(binding)
+        return binding.root
+    }
 
+    private fun setViewModel() {
         viewModel = ViewModelProvider(
             this,
             CityViewModelFactory(placesRepository)
         ).get(CityViewModel::class.java)
 
         viewModel.getData()
+        viewModel.getDataUsingToken()
+    }
 
+    private fun setAdapter(binding: FragmentCityBinding) {
         cityAdapter = CityAdapter()
         binding.citiesRv.adapter = cityAdapter
 
-        viewModel.citiesList.observe(viewLifecycleOwner, Observer {
+        viewModel.citiesListObservable.observe(viewLifecycleOwner, Observer {
             cityAdapter.setData(it)
-        }
-        )
-        return binding.root
+        })
     }
+
 }
