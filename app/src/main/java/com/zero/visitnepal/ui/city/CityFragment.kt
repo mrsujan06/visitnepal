@@ -43,9 +43,7 @@ class CityFragment : Fragment() {
             CityViewModelFactory(placesRepository)
         ).get(CityViewModel::class.java)
 
-        val token = arguments?.getString("token")
         viewModel.getData()
-        token?.let { viewModel.getDataUsingToken(it) }
     }
 
     private fun setAdapter(binding: FragmentCityBinding) {

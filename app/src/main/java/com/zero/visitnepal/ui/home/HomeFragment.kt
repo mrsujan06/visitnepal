@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.zero.visitnepal.App
 import com.zero.visitnepal.R
 import com.zero.visitnepal.databinding.FragmentHomeBinding
@@ -39,10 +39,6 @@ class HomeFragment : Fragment() {
     private lateinit var homeAttractionAdapter: HomePlacesAdapter
     private lateinit var homeMountainAdapter: HomePlacesAdapter
     private lateinit var homeTempleAdapter: HomePlacesAdapter
-
-    companion object {
-        const val CITY_TOKEN = "token"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,14 +81,14 @@ class HomeFragment : Fragment() {
             HomeFragmentViewModel::class.java
         )
         viewModel.fetchPlacesData()
+
         observePlaces(viewModel.cityObservable, homeCityAdapter)
         observePlaces(viewModel.attractionObservable, homeAttractionAdapter)
         observePlaces(viewModel.mountainObservable, homeMountainAdapter)
         observePlaces(viewModel.templeObservable, homeTempleAdapter)
 
-        viewModel.cityTokenObservable.observe(viewLifecycleOwner, Observer {
-            val bundle = bundleOf(CITY_TOKEN to it)
-            binding.cities.onClicked(R.id.action_homeFragment_to_cityFragment, bundle)
+        binding.cities.setClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_cityFragment)
         })
 
         viewModel.loadingState.observe(viewLifecycleOwner, Observer {

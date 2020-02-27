@@ -38,10 +38,6 @@ class HomeFragmentViewModel @Inject constructor(
     val loadingState: LiveData<LoadingState>
         get() = _loadingState
 
-    private val _cityTokenObservable = MutableLiveData<String>()
-    val cityTokenObservable: LiveData<String>
-        get() = _cityTokenObservable
-
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -53,7 +49,6 @@ class HomeFragmentViewModel @Inject constructor(
             } else {
                 _loadingState.value = LoadingState.LOADING
                 observeTenPlaces(_cityObservable, repository.fetchCities()) //cities
-                _cityTokenObservable.value = repository.fetchCities().nextPageToken
                 observeTenPlaces(_attractionObservable, repository.fetchAttractions()) //attraction
                 observeTenPlaces(_mountainObservable, repository.fetchMountains()) //mountains
                 observeTenPlaces(_templeObservable, repository.fetchTemples()) //temples
