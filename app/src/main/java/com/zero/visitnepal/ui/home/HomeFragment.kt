@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.zero.visitnepal.App
 import com.zero.visitnepal.R
 import com.zero.visitnepal.databinding.FragmentHomeBinding
@@ -49,8 +50,7 @@ class HomeFragment : Fragment() {
         (activity?.applicationContext as App).appComponent.inject(this)
         setViewPager(binding)
         setAdapter(binding)
-        setViewModel()
-
+        setViewModel(binding)
         onRetry(binding)
         return binding.root
     }
@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
         binding.temples.setAdapter(homeTempleAdapter)
     }
 
-    private fun setViewModel() {
+    private fun setViewModel(binding: FragmentHomeBinding) {
         viewModel = ViewModelProvider(
             this,
             HomeFragmentViewModelFactory(placesRepository, connectionChecker)
@@ -85,6 +85,10 @@ class HomeFragment : Fragment() {
         observePlaces(viewModel.attractionObservable, homeAttractionAdapter)
         observePlaces(viewModel.mountainObservable, homeMountainAdapter)
         observePlaces(viewModel.templeObservable, homeTempleAdapter)
+
+        binding.cities.setClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_cityFragment)
+        })
 
         viewModel.loadingState.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -126,6 +130,6 @@ class HomeFragment : Fragment() {
         error_container.visibility = View.VISIBLE
         progressbar_container.visibility = View.GONE
         home_container.visibility = View.GONE
-        Toast.makeText(context, "Please Connect to Network", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, R.string.network_error_message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -20,4 +20,9 @@ class PlacesRepositoryImp(private val placesService: PlacesService) : PlacesRepo
     override suspend fun fetchTemples(): PlacesResponse {
         return placesService.fetchPlaces(Constant.TEMPLE_QUERY, Constant.API_KEY)
     }
+
+    override suspend fun fetchNextPage(token: String): PlacesResponse {
+        return placesService.fetchPlacesUsingToken(token, Constant.API_KEY)
+    }
+
 }

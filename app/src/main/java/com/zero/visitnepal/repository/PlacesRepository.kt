@@ -7,4 +7,5 @@ interface PlacesRepository {
     suspend fun fetchAttractions(): PlacesResponse
     suspend fun fetchMountains(): PlacesResponse
     suspend fun fetchTemples(): PlacesResponse
+    suspend fun fetchNextPage(token: String): PlacesResponse
 }

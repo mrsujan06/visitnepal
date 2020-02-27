@@ -8,7 +8,7 @@ data class PlacesResponse(
     @Json(name = "next_page_token")
     val nextPageToken: String?,
     @Json(name = "results")
-    var results: List<Result>,
+    var results: List<PlacesResult>,
     @Json(name = "status")
     val status: String
 )

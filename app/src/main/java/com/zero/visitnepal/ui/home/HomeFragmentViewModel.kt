@@ -1,7 +1,5 @@
 package com.zero.visitnepal.ui.home
 
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,7 +40,6 @@ class HomeFragmentViewModel @Inject constructor(
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     // fetch places data
     fun fetchPlacesData() = coroutineScope.launch {

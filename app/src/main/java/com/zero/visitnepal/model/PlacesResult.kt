@@ -2,7 +2,7 @@ package com.zero.visitnepal.model
 
 import com.squareup.moshi.Json
 
-data class Result(
+data class PlacesResult(
     @Json(name = "formatted_address")
     val formattedAddress: String,
     @Json(name = "geometry")
