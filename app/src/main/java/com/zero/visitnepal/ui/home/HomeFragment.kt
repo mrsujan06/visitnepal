@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -39,6 +40,10 @@ class HomeFragment : Fragment() {
     private lateinit var homeMountainAdapter: HomePlacesAdapter
     private lateinit var homeTempleAdapter: HomePlacesAdapter
 
+    companion object {
+        const val CITY_TOKEN = "token"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +54,7 @@ class HomeFragment : Fragment() {
         (activity?.applicationContext as App).appComponent.inject(this)
         setViewPager(binding)
         setAdapter(binding)
-        setViewModel()
+        setViewModel(binding)
         onRetry(binding)
         return binding.root
     }
@@ -72,7 +77,7 @@ class HomeFragment : Fragment() {
         binding.temples.setAdapter(homeTempleAdapter)
     }
 
-    private fun setViewModel() {
+    private fun setViewModel(binding: FragmentHomeBinding) {
         viewModel = ViewModelProvider(
             this,
             HomeFragmentViewModelFactory(placesRepository, connectionChecker)
@@ -85,6 +90,11 @@ class HomeFragment : Fragment() {
         observePlaces(viewModel.mountainObservable, homeMountainAdapter)
         observePlaces(viewModel.templeObservable, homeTempleAdapter)
 
+        viewModel.cityTokenObservable.observe(viewLifecycleOwner, Observer {
+            val bundle = bundleOf(CITY_TOKEN to it)
+            binding.cities.onClicked(R.id.action_homeFragment_to_cityFragment, bundle)
+        })
+
         viewModel.loadingState.observe(viewLifecycleOwner, Observer {
             when (it) {
                 HomeFragmentViewModel.LoadingState.LOADING -> displayProgressbar()
@@ -92,9 +102,6 @@ class HomeFragment : Fragment() {
                 else -> displayConnectionError()
             }
         })
-
-        cities.navigate(R.id.action_homeFragment_to_cityFragment)
-
     }
 
     private fun observePlaces(

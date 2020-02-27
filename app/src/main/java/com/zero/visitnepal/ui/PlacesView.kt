@@ -1,6 +1,7 @@
 package com.zero.visitnepal.ui
 
 import android.content.Context
+import android.os.Bundle
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
@@ -21,7 +22,7 @@ class PlacesView(context: Context, attrs: AttributeSet) : ConstraintLayout(conte
         places_list_rv.adapter = homePlacesAdapter
     }
 
-    fun navigate(resId: Int) {
-        places_cardview.setOnClickListener { findNavController().navigate(resId) }
+    fun onClicked(resId: Int, bundle: Bundle) {
+        places_cardview.setOnClickListener { findNavController().navigate(resId, bundle) }
     }
 }

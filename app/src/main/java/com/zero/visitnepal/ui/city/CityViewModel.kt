@@ -22,24 +22,22 @@ class CityViewModel @Inject constructor(val repository: PlacesRepository) : View
     val citiesListObservable: LiveData<List<PlacesResult>>
         get() = _citiesListObservable
 
-    private val cityList =mutableListOf<PlacesResult>()
-    private var nextPageToken: String?  = null
+    private val cityList = mutableListOf<PlacesResult>()
 
     fun getData() = coroutineScope.launch {
         try {
             val cities = repository.fetchCities()
-            nextPageToken = cities.nextPageToken
             cityList.addAll(cities.results)
         } catch (networkError: IOException) {
             Timber.e(networkError)
         }
     }
 
-    fun getDataUsingToken() = coroutineScope.launch {
+    fun getDataUsingToken(token: String) = coroutineScope.launch {
         try {
-            val cities = repository.fetchNextPage(nextPageToken)
+            val cities = repository.fetchNextPage(token)
             cityList.addAll(cities.results)
-            _citiesListObservable.value= cityList
+            _citiesListObservable.value = cityList
         } catch (networkError: IOException) {
             Timber.e(networkError)
         }
