@@ -35,7 +35,7 @@ class HomePlacesAdapter : RecyclerView.Adapter<HomePlacesAdapter.HomePlacesViewH
 
     fun setData(cityList: PlacesResponse) {
         placeList.clear()
-        placeList.addAll(cityList.results)
+        placeList.addAll(cityList.results.take(10))
         notifyDataSetChanged()
     }
 

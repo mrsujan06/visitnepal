@@ -68,7 +68,6 @@ class HomeFragmentViewModel @Inject constructor(
 
     ) {
         placesResponse.apply {
-            this.results = this.results.take(10)
             placesObservable.value = this
         }
     }

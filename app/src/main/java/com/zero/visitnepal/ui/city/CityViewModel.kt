@@ -3,6 +3,7 @@ package com.zero.visitnepal.ui.city
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zero.visitnepal.model.PlacesResponse
 import com.zero.visitnepal.model.PlacesResult
 import com.zero.visitnepal.repository.PlacesRepository
 import kotlinx.coroutines.*
@@ -21,26 +22,19 @@ class CityViewModel @Inject constructor(val repository: PlacesRepository) : View
 
     private val cityList = mutableListOf<PlacesResult>()
 
-    fun getData() = coroutineScope.launch {
+    fun getData(cityResponse: PlacesResponse) = coroutineScope.launch {
         try {
-            val cities = repository.fetchCities()
-            cityList.addAll(cities.results)
-            delay(2000)
-            cities.nextPageToken?.let { getDataUsingToken(it) }
-        } catch (networkError: IOException) {
-            Timber.e(networkError)
-        }
-    }
-
-    private fun getDataUsingToken(token: String) = coroutineScope.launch {
-        try {
-            val cities = repository.fetchNextPage(token)
-            cityList.addAll(cities.results)
+            cityList.addAll(cityResponse.results)
+            val nextPageToken = cityResponse.nextPageToken
+            delay(1500)
+            val cities = nextPageToken?.let { repository.fetchNextPage(it) }
+            cityList.addAll(cities!!.results)
             _citiesListObservable.value = cityList
         } catch (networkError: IOException) {
             Timber.e(networkError)
         }
     }
+
 
     override fun onCleared() {
         super.onCleared()

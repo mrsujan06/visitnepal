@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -28,12 +29,15 @@ import javax.inject.Inject
  */
 class HomeFragment : Fragment() {
 
+    companion object {
+        const val CITYRESPONSE = "cityresponse"
+    }
+
     @Inject
     lateinit var placesRepository: PlacesRepository
 
     @Inject
     lateinit var connectionChecker: ConnectionChecker
-
     private lateinit var viewModel: HomeFragmentViewModel
     private lateinit var homeCityAdapter: HomePlacesAdapter
     private lateinit var homeAttractionAdapter: HomePlacesAdapter
@@ -87,7 +91,12 @@ class HomeFragment : Fragment() {
         observePlaces(viewModel.templeObservable, homeTempleAdapter)
 
         binding.cities.setClickListener(View.OnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_cityFragment)
+            viewModel.cityObservable.observe(viewLifecycleOwner, Observer {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_cityFragment,
+                    bundleOf(CITYRESPONSE to it)
+                )
+            })
         })
 
         viewModel.loadingState.observe(viewLifecycleOwner, Observer {
